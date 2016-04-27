@@ -29,7 +29,7 @@ def mouseclick(pos):
                         
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
-    global cards, exposed, ind
+    global cards, exposed
 
     for n in range(len(cards)):
         n_p = w*n+10		# number position
