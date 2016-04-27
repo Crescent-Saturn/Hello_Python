@@ -10,23 +10,54 @@ random.shuffle(cards)
 w =50
 h =100
 
-exposed = range(16)
-for i in exposed:
-    exposed[i] = False
+set_text = 0
 
 # helper function to initialize globals
 def new_game():
-    pass
-
+    global state,exposed,set_text
+    state = 0
+    set_text = 0
+    exposed = range(16)
+    for i in exposed:
+        exposed[i] = False
      
 # define event handlers
 def mouseclick(pos):
     # add game state logic here
-    global exposed
-    ind = pos[0]//w
-    exposed[ind] = True
-    
-                        
+    global exposed, state, set_text, c1, c2  
+    if state == 0:
+        ind = pos[0]//w
+        if not exposed[ind]:
+            exposed[ind] = True
+            c1 = ind
+        else:
+            pass  
+
+        state = 1
+        
+    elif state == 1:
+        ind = pos[0]//w
+        if not exposed[ind]:
+            exposed[ind] = True
+            c2 = ind
+        else:
+            pass   
+        
+        state = 2
+      
+    else:
+        ind = pos[0]//w 
+        if not exposed[ind]:
+            if cards[c1] != cards[c2]:
+                exposed[c1] = False
+                exposed[c2] = False  
+            exposed[ind] = True
+            c1 = ind
+        else:
+            pass  
+        set_text +=1
+        state = 1
+        
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
     global cards, exposed
@@ -45,7 +76,7 @@ def draw(canvas):
 # create frame and add a button and labels
 frame = simplegui.create_frame("Memory", 800, 100)
 frame.add_button("Reset", new_game)
-label = frame.add_label("Turns = 0")
+label = frame.add_label("Turns = "+str(set_text))
 
 # register event handlers
 frame.set_mouseclick_handler(mouseclick)
