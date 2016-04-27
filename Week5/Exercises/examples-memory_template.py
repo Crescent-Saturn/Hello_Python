@@ -5,6 +5,7 @@ import random
     
 cards = range(8)
 cards.extend(range(8))
+random.shuffle(cards)
 
 w =50
 h =100
@@ -21,13 +22,15 @@ def new_game():
 # define event handlers
 def mouseclick(pos):
     # add game state logic here
-    pass
+    global exposed
+    ind = pos[0]//w
+    exposed[ind] = True
     
                         
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
-    global cards, exposed
-#    random.shuffle(cards)
+    global cards, exposed, ind
+
     for n in range(len(cards)):
         n_p = w*n+10		# number position
         c_p = [(n*w,0),((n+1)*w,0),((n+1)*w,h),(n*w,h)]		# card position
@@ -36,8 +39,7 @@ def draw(canvas):
         else:
             canvas.draw_polygon(c_p, 2, 'White','Green')
         
-#    random.shuffle(cards)
-    
+
     
 
 # create frame and add a button and labels
