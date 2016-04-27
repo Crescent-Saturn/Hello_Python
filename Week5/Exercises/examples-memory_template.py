@@ -20,7 +20,7 @@ def new_game():
     exposed = range(16)
     for i in exposed:
         exposed[i] = False
-     
+
 # define event handlers
 def mouseclick(pos):
     # add game state logic here
@@ -46,7 +46,8 @@ def mouseclick(pos):
         state = 2
       
     else:
-        ind = pos[0]//w 
+        ind = pos[0]//w
+        
         if not exposed[ind]:
             if cards[c1] != cards[c2]:
                 exposed[c1] = False
@@ -54,8 +55,10 @@ def mouseclick(pos):
             exposed[ind] = True
             c1 = ind
         else:
-            pass  
-        set_text +=1
+            pass
+        
+        set_text += 1
+        label.set_text("Turns = "+str(set_text))
         state = 1
         
 # cards are logically 50x100 pixels in size    
@@ -76,7 +79,7 @@ def draw(canvas):
 # create frame and add a button and labels
 frame = simplegui.create_frame("Memory", 800, 100)
 frame.add_button("Reset", new_game)
-label = frame.add_label("Turns = "+str(set_text))
+label = frame.add_label("Turns = 0")
 
 # register event handlers
 frame.set_mouseclick_handler(mouseclick)
