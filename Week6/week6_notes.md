@@ -26,13 +26,13 @@ You would need to write a class [[OvalDomain]] with the same methods as [[Rectan
  
 
 #### Create and working with objects
-** Remember to call class methods via object_name.method(...) **
+**Remember to call class methods via object_name.method(...)**
 
-** Remember that an object is created via class_obj = ClassName(...) **  
+**Remember that an object is created via class_obj = ClassName(...)**  
 The self paramter is created by Python.  
 
-*Quitz: If particel is a Python list, what will happen if you execute the following line of Python in the draw handler:`particle.draw(canvas)`
-	> *Solution: you will get an AttributeError because list does not have a draw method.
+*Quitz: If particel is a Python list, what will happen if you execute the following line of Python in the draw handler:`particle.draw(canvas)`*  
+>Solution: you will get an AttributeError because list does not have a draw method.
 
 * The class initializer [[__init__]]  generates instances of class objects. In Python, this initializer can be called via the expression [[class_name(...)]]. For example, an instance of the [[Deck]] class can be created via the statement [[my_deck = Deck(...)]].
 * The first parameter to class methods is, by convention, always named [[self]]. This name refers to the object being acted on by the method.
@@ -42,7 +42,11 @@ The self paramter is created by Python.
 
 
 ### Classes for Blackjack
-** Blackjack **:
+**Blackjack**:
 * Card -- rank & suit (image)
 * Hand -- collection of cards [hit score]
 * Deck -- collection of cards [shuffle deal]
+
+*Quitz: Why should a blackjack hand and a deck of cards be implemented as two different classes?*  
+>Solution: They each have different behaviors and you might reuse the deck class in a different card game. The hand is specific to blackjack.  
+
