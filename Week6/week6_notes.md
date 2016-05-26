@@ -50,3 +50,15 @@ The self paramter is created by Python.
 *Quitz: Why should a blackjack hand and a deck of cards be implemented as two different classes?*  
 >Solution: They each have different behaviors and you might reuse the deck class in a different card game. The hand is specific to blackjack.  
 
+
+
+
+### Tired Images
+
+*Quitz: What information do you need to draw a single image from a tiled image?*
+> Solution: The size (width and height) of each image and how the images are arranged in the tiled image.  
+
+
+#### Programming tips
+
+**Ref:programming-tips-6.py**
