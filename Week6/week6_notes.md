@@ -57,7 +57,7 @@ The self paramter is created by Python.
 * A tiled image is a single image that consists of a set of smaller images laid out in a regular grid.
 * Tiled images are useful since loading a single large image is faster than loading many small images.
 * Small images in the tiled image can be drawn by specifying the appropriate source rectangle for 𝚍𝚛𝚊𝚠_𝚒𝚖𝚊𝚐𝚎 using the size of the small image and its position in the grid.
-* Lecture examples - Tiled Images
+* Lecture examples - [Tiled Images](http://www.codeskulptor.org/#examples-tiled_images.py)
 * More examples - [Bunny Emotions](http://www.codeskulptor.org/#examples-more-6_tiled_images-bunny_emotions.py)
 
 
