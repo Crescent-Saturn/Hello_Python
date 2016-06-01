@@ -58,7 +58,7 @@ The self paramter is created by Python.
 * Tiled images are useful since loading a single large image is faster than loading many small images.
 * Small images in the tiled image can be drawn by specifying the appropriate source rectangle for 𝚍𝚛𝚊𝚠_𝚒𝚖𝚊𝚐𝚎 using the size of the small image and its position in the grid.
 * Lecture examples - Tiled Images
-* More examples - [!Bunny Emotions]<http://www.codeskulptor.org/#examples-more-6_tiled_images-bunny_emotions.py>
+* More examples - [Bunny Emotions](http://www.codeskulptor.org/#examples-more-6_tiled_images-bunny_emotions.py)
 
 
 *Quitz: What information do you need to draw a single image from a tiled image?*
