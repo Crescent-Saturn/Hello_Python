@@ -17,7 +17,7 @@ v=v+a∗dt
 * Attempting to play several versions of the same sound object at the same time in not possible. However, different sounds objects can play on different channels simultaneously.
 * Different browser support different sound formats. Short sounds are laggy in Firefox.
 * Lecture examples - [Sound](http://www.codeskulptor.org/#examples-sound.py)
-* More examples - Bouncing Ball
+* More examples - [Bouncing Ball](http://www.codeskulptor.org/#examples-more-7_sound-bouncing_sounds.py)
 
 
 ##### 7b  **Sprites** — Sprite class
@@ -28,3 +28,16 @@ v=v+a∗dt
 * For the Spaceship and Asteroids mini-projects, sprites have an associated 𝙸𝚖𝚊𝚐𝚎𝙸𝚗𝚏𝚘 class with fields that contain the center, size, radius, lifespan and animated flag for an image.
 * Lecture examples - [Sprite Example](http://www.codeskulptor.org/#examples-sprite_example.py), [Spaceship](http://www.codeskulptor.org/#examples-spaceship.py), [Project Template](http://www.codeskulptor.org/#examples-spaceship_template.py)
 * More examples - [Curling](http://www.codeskulptor.org/#examples-more-7_acceleration_and_friction-curling.py)
+
+
+**RGB colors and HTML color strings**
+
+* In the RGB color model, colors are represented as a triple of integers in the range of 0 to 255.
+* Each component corresponds to red, green and blue, respectively. The value of the component corresponds to the intensity of the corresponding color, with 0 being no intensity and 255 being full intensity.
+* HTML color strings encode RGB colors as a string "𝚛𝚐𝚋(𝚛,𝚐,𝚋)" where the three values lie in the range 0 to 255.
+* An extra alpha channel may be added to control transparency. The HTML color string has the form "𝚛𝚐𝚋𝚊(𝚛,𝚐,𝚋,𝚊)" where a is in the the range 0 (transparent) to 1 (opaque).
+* Lecture examples - None
+* More examples - [Fading Dots](http://www.codeskulptor.org/#examples-more-7_colors-fading_dots.py)
+
+
+** Programming Tips** -- [Week 7](http://www.codeskulptor.org/#examples-tips7.py)
