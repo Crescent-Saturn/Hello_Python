@@ -74,3 +74,44 @@ The self paramter is created by Python.
 
 **Ref:programming-tips-6.py**
 
+<<<<<<< HEAD
+=======
+===
+
+### Mini-project Notes
+
+#### Blackjack
+
+**Determining  the value of a hand**    
+> Value of a card  
+> * Nb card == Nb  
+> * J,Q,K == 10  
+> * Ace == 1 or 11 (player's choice)  
+
+> Value of Blackjack hand  
+> * Key: **Nevers count 2 Aces as 11**  
+> * hand_value = sum(cards_value with Aces as 1)  
+> * If the hand has no Aces:  
+>   return hand_value  
+> * elif hand_value +10 <= 21:  
+>   return hand_value + 10  
+> * else  return hand_value  
+
+**Determining when the dealer should stand**
+
+> While the value of the dealer's hand is less than 17  
+> * hit the dealer'hand
+
+
+Python- while loop
+```
+while test:  
+    body
+```
+
+Use the get_value method for a hand inside test  
+Use the hit method for hand inside the body  
+
+
+
+>>>>>>> dev
