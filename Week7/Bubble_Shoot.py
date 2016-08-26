@@ -44,13 +44,17 @@ class Bubble:
         
         if self.pos[0]<=BUBBLE_RADIUS or self.pos[0]>=WIDTH-BUBBLE_RADIUS:
             self.vel[0] = -self.vel[0]
-        
-                
+            
+        if self.pos[1]<=BUBBLE_RADIUS:
+            bubble_struck = True
+            self.vel = [0,0]    
+            
     def fire_bubble(self, vel):
         self.vel = vel
         
     def is_stuck(self): 
-        pass
+        if bubble_stuck:
+            self.vel = [0,0]
 
     def collide(self, bubble):
         pass
