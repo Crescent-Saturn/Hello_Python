@@ -35,7 +35,7 @@ v=v+a∗dt
 * In the RGB color model, colors are represented as a triple of integers in the range of 0 to 255.
 * Each component corresponds to red, green and blue, respectively. The value of the component corresponds to the intensity of the corresponding color, with 0 being no intensity and 255 being full intensity.
 * HTML color strings encode RGB colors as a string "𝚛𝚐𝚋(𝚛,𝚐,𝚋)" where the three values lie in the range 0 to 255.
-* An extra alpha channel may be added to control transparency. The HTML color string has the form "𝚛𝚐𝚋𝚊(𝚛,𝚐,𝚋,𝚊)" where a is in the the range 0 (transparent) to 1 (opaque).
+* An extra alpha channel may be added to control transparency. The HTML color string has the form "𝚛𝚐𝚋𝚊(𝚛,𝚐,𝚋,𝚊)" where a is in the the range 0 (transparent) to 1 (opaque). PNG image format is the popular choice.
 * Lecture examples - None
 * More examples - [Fading Dots](http://www.codeskulptor.org/#examples-more-7_colors-fading_dots.py)
 
