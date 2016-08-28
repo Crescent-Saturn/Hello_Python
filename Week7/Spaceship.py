@@ -10,6 +10,7 @@ score = 0
 lives = 3
 time = 0
 
+
 class ImageInfo:
     def __init__(self, center, size, radius = 0, lifespan = None, animated = False):
         self.center = center
@@ -100,9 +101,17 @@ class Ship:
         self.image_size = info.get_size()
         self.radius = info.get_radius()
         
+        self.thrust = False
+        
     def draw(self,canvas):
         #canvas.draw_circle(self.pos, self.radius, 1, "White", "White")
+        if self.thrust:
+            self.image_center = [135,45]
+        else:
+            self.image_center = [45, 45]
         canvas.draw_image(self.image, self.image_center, self.image_size, self.pos, self.image_size, self.angle)
+                    
+         
         
     def update(self):
         
@@ -122,6 +131,14 @@ class Ship:
         # Angle update
         #vel= angle_to_vector(self.angle)
         self.angle += self.angle_vel
+    
+    def on_off(self,thrust):
+        self.thrust = thrust
+        if self.thrust:
+            ship_thrust_sound.play()
+        else:
+            ship_thrust_sound.rewind()
+            
         
 # Sprite class
 class Sprite:
@@ -179,6 +196,12 @@ def rock_spawner():
 # keyboard handler
 def keydown(key):
     global my_ship
+    if key == simplegui.KEY_MAP['up']:
+        my_ship.on_off(True)
+        #my_ship.on_off()
+        #vel = angle_to_vector(my_ship.angle)
+        #my_ship.vel = [vel[0]*2,vel[1]*2]
+    
     if key == simplegui.KEY_MAP['left']:
         my_ship.angle_vel -= 0.08
     elif key == simplegui.KEY_MAP['right']:
@@ -186,6 +209,9 @@ def keydown(key):
 
 def keyup(key):
     global my_ship
+    if key == simplegui.KEY_MAP['up']:
+        my_ship.on_off(False)
+    
     if key == simplegui.KEY_MAP['left']:
         my_ship.angle_vel += 0.08
     elif key == simplegui.KEY_MAP['right']:
