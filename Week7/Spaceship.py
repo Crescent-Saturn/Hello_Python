@@ -105,6 +105,8 @@ class Ship:
         canvas.draw_image(self.image, self.image_center, self.image_size, self.pos, self.image_size, self.angle)
         
     def update(self):
+        
+        # Position update
         self.pos[0] += self.vel[0]
         self.pos[1] += self.vel[1]
         
@@ -116,7 +118,11 @@ class Ship:
             self.pos[1] = self.pos[1] // HEIGHT
         elif self.pos[1]<=0:
             self.pos[1] = HEIGHT - self.pos[1]
-    
+        
+        # Angle update
+        #vel= angle_to_vector(self.angle)
+        self.angle += self.angle_vel
+        
 # Sprite class
 class Sprite:
     def __init__(self, pos, vel, ang, ang_vel, image, info, sound = None):
@@ -136,7 +142,8 @@ class Sprite:
             sound.play()
    
     def draw(self, canvas):
-        canvas.draw_circle(self.pos, self.radius, 1, "Red", "Red")
+        #canvas.draw_circle(self.pos, self.radius, 1, "Red", "Red")
+        canvas.draw_image(self.image, self.image_center, self.image_size, self.pos, self.image_size, self.angle)
     
     def update(self):
         pass        
@@ -167,17 +174,35 @@ def draw(canvas):
 # timer handler that spawns a rock    
 def rock_spawner():
     pass
+
+
+# keyboard handler
+def keydown(key):
+    global my_ship
+    if key == simplegui.KEY_MAP['left']:
+        my_ship.angle_vel -= 0.08
+    elif key == simplegui.KEY_MAP['right']:
+        my_ship.angle_vel += 0.08    
+
+def keyup(key):
+    global my_ship
+    if key == simplegui.KEY_MAP['left']:
+        my_ship.angle_vel += 0.08
+    elif key == simplegui.KEY_MAP['right']:
+        my_ship.angle_vel -= 0.08       
     
 # initialize frame
 frame = simplegui.create_frame("Asteroids", WIDTH, HEIGHT)
 
 # initialize ship and two sprites
-my_ship = Ship([WIDTH / 2, HEIGHT / 2], [-3, -3], 0, ship_image, ship_info)
+my_ship = Ship([WIDTH / 2, HEIGHT / 2], [0, 0], 0, ship_image, ship_info)
 a_rock = Sprite([WIDTH / 3, HEIGHT / 3], [1, 1], 0, 0, asteroid_image, asteroid_info)
 a_missile = Sprite([2 * WIDTH / 3, 2 * HEIGHT / 3], [-1,1], 0, 0, missile_image, missile_info, missile_sound)
 
 # register handlers
 frame.set_draw_handler(draw)
+frame.set_keydown_handler(keydown)
+frame.set_keyup_handler(keyup)
 
 timer = simplegui.create_timer(1000.0, rock_spawner)
 
