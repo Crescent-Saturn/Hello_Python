@@ -129,8 +129,21 @@ class Ship:
             self.pos[1] = HEIGHT - self.pos[1]
         
         # Angle update
-        #vel= angle_to_vector(self.angle)
+        
         self.angle += self.angle_vel
+        vec= angle_to_vector(self.angle)
+        
+        # Friction
+        f = 0.01
+        self.vel[0] *= (1-f)
+        self.vel[1] *= (1-f)
+        
+        # Thrust update
+        if self.thrust:
+            self.vel[0] += vec[0]*0.3
+            self.vel[1] += vec[1]*0.3        
+
+        
     
     def on_off(self,thrust):
         self.thrust = thrust
