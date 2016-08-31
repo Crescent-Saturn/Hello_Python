@@ -122,11 +122,11 @@ class Ship:
         if self.pos[0]>= WIDTH: 
             self.pos[0] = self.pos[0] // WIDTH
         elif self.pos[0]<=0:
-            self.pos[0] = WIDTH - self.pos[0]
+            self.pos[0] = self.pos[0] & WIDTH
         if self.pos[1]>= HEIGHT:
             self.pos[1] = self.pos[1] // HEIGHT
         elif self.pos[1]<=0:
-            self.pos[1] = HEIGHT - self.pos[1]
+            self.pos[1] = self.pos[1] & HEIGHT
         
         # Angle update
         
@@ -176,8 +176,19 @@ class Sprite:
         canvas.draw_image(self.image, self.image_center, self.image_size, self.pos, self.image_size, self.angle)
     
     def update(self):
-        pass        
-
+        self.pos[0] += self.vel[0]
+        self.pos[1] += self.vel[1]
+        
+        if self.pos[0]>= WIDTH: 
+            self.pos[0] = self.pos[0] // WIDTH
+        elif self.pos[0]<=0:
+            self.pos[0] = self.pos[0] & WIDTH
+        if self.pos[1]>= HEIGHT:
+            self.pos[1] = self.pos[1] // HEIGHT
+        elif self.pos[1]<=0:
+            self.pos[1] = self.pos[1] & HEIGHT
+            
+        self.angle += self.angle_vel
            
 def draw(canvas):
     global time
@@ -203,8 +214,11 @@ def draw(canvas):
             
 # timer handler that spawns a rock    
 def rock_spawner():
-    pass
-
+    global a_rock
+    a_rock.pos[0] = random.randrange(45,WIDTH-45)
+    a_rock.pos[1] = random.randrange(45,HEIGHT-45)
+    a_rock.vel = [random.random()*4-2,random.random()*4-2]
+    a_rock.angle_vel = random.random()*0.15-0.075
 
 # keyboard handler
 def keydown(key):
