@@ -143,8 +143,7 @@ class Ship:
             self.vel[0] += vec[0]*0.3
             self.vel[1] += vec[1]*0.3        
 
-        
-    
+         
     def on_off(self,thrust):
         self.thrust = thrust
         if self.thrust:
@@ -152,6 +151,16 @@ class Ship:
         else:
             ship_thrust_sound.rewind()
             
+
+    def shoot(self):
+        global a_missile
+        pp = angle_to_vector(self.angle)
+        a_missile.pos[0] = self.pos[0] + pp[0]*40
+        a_missile.pos[1] = self.pos[1] + pp[1]*40
+        
+        a_missile.vel[0] =  pp[0]*3 + self.vel[0] 
+        a_missile.vel[1] =  pp[1]*3 + self.vel[1]  
+        missile_sound.play()
         
 # Sprite class
 class Sprite:
@@ -191,7 +200,7 @@ class Sprite:
         self.angle += self.angle_vel
            
 def draw(canvas):
-    global time
+    global time, score, lives
     
     # animiate background
     time += 1
@@ -211,7 +220,12 @@ def draw(canvas):
     my_ship.update()
     a_rock.update()
     a_missile.update()
-            
+    
+    
+    # Score and lives
+    canvas.draw_text('Score: '+str(score), [WIDTH/5,HEIGHT/6], 20, 'White')
+    canvas.draw_text('Lives: '+str(lives), [WIDTH*3/4,HEIGHT/6],20, 'White')
+    
 # timer handler that spawns a rock    
 def rock_spawner():
     global a_rock
@@ -225,9 +239,9 @@ def keydown(key):
     global my_ship
     if key == simplegui.KEY_MAP['up']:
         my_ship.on_off(True)
-        #my_ship.on_off()
-        #vel = angle_to_vector(my_ship.angle)
-        #my_ship.vel = [vel[0]*2,vel[1]*2]
+
+    if key == simplegui.KEY_MAP['space']:
+        my_ship.shoot()
     
     if key == simplegui.KEY_MAP['left']:
         my_ship.angle_vel -= 0.08
