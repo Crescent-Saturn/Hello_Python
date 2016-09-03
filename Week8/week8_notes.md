@@ -68,3 +68,36 @@ Animation ==> continus images
 
 
 **Other examples**  — [Balloon Pop (collisions)](http://www.codeskulptor.org/#examples-more-8_collisions-balloon_pop.py), [Project Template](http://www.codeskulptor.org/#examples-ricerocks_template.py)	
+
+
+
+###Programming Tips - 8
+
+```Python
+s = set([1,2,3,4])  
+t = set([3,4,5,6])
+
+print s.intersection(t)
+print s
+print t
+
+print s.intersection_update(t)
+print s
+print t
+```
+
+
+```Python
+s = set([1, 2, 3])
+t = set([2, 3, 4])
+r = s
+s.intersection_update(t)
+q = s.union(r)
+print q
+```
+
+r = s  # Refering changes both
+Output:
+	> set([2,3]) 
+
+
