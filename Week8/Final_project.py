@@ -277,7 +277,7 @@ def process_sprite_group(rock_group,missile_group,canvas):
         a_rock.update()
 
 	for a_missile in missile_group:
-		
+		a_missile.draw(canvas)
 	
 def group_collide(group,other_object):
 	#global group, other_object
