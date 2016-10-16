@@ -145,11 +145,12 @@ class Ship:
         self.angle_vel -= .05
         
     def shoot(self):
-        global a_missile
+        global missile_group #a_missile
         forward = angle_to_vector(self.angle)
         missile_pos = [self.pos[0] + self.radius * forward[0], self.pos[1] + self.radius * forward[1]]
         missile_vel = [self.vel[0] + 6 * forward[0], self.vel[1] + 6 * forward[1]]
         a_missile = Sprite(missile_pos, missile_vel, self.angle, 0, missile_image, missile_info, missile_sound)
+        missile_group.add(a_missile)
     
   
     
@@ -269,12 +270,15 @@ def rock_spawner():
     if len(rock_group) < 12:
         rock_group.add(a_rock)
 
-def process_sprite_group(rock_group,canvas):
+def process_sprite_group(rock_group,missile_group,canvas):
     #global rock_group
     for a_rock in rock_group:
         a_rock.draw(canvas)
         a_rock.update()
 
+	for a_missile in missile_group:
+		a_missile.draw(canvas)
+	
 def group_collide(group,other_object):
 	#global group, other_object
 	col = False
@@ -291,11 +295,10 @@ frame = simplegui.create_frame("Asteroids", WIDTH, HEIGHT)
 # initialize ship and two sprites
 my_ship = Ship([WIDTH / 2, HEIGHT / 2], [0, 0], 0, ship_image, ship_info)
 rock_group = set()
-#group = set()
-#other_object = my_ship
-
 #a_rock = Sprite([WIDTH / 3, HEIGHT / 3], [1, 1], 0, .1, asteroid_image, asteroid_info)
-a_missile = Sprite([2 * WIDTH / 3, 2 * HEIGHT / 3], [-1,1], 0, 0, missile_image, missile_info, missile_sound)
+
+missile_group = set()
+#a_missile = Sprite([2 * WIDTH / 3, 2 * HEIGHT / 3], [-1,1], 0, 0, missile_image, missile_info, missile_sound)
 
 
 # register handlers
