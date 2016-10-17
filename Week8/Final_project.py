@@ -183,13 +183,12 @@ class Sprite:
         # update position
         self.pos[0] = (self.pos[0] + self.vel[0]) % WIDTH
         self.pos[1] = (self.pos[1] + self.vel[1]) % HEIGHT
-  		
-  		self.age += 1
-  		
-  		return self.age >= self.lifespan
-  		
+        
+        self.age += 1
+        return self.age >= self.lifespan
+        
     def collide(self, other_object):
-    	return dist(self.pos, other_object.pos) <= self.radius+other_object.radius
+        return dist(self.pos, other_object.pos) <= self.radius+other_object.radius
         
 # key handlers to control ship   
 def keydown(key):
@@ -242,7 +241,7 @@ def draw(canvas):
     process_sprite_group(rock_group,missile_group,canvas)
 
     if group_collide(rock_group,my_ship):
-    	lives -= 1
+        lives -= 1
         
     # update ship and sprites
     my_ship.update()
@@ -280,19 +279,24 @@ def process_sprite_group(rock_group,missile_group,canvas):
         a_rock.draw(canvas)
         a_rock.update()
 
-	for a_missile in missile_group:
-		a_missile.draw(canvas)
-		a_missile.update()
-	
+    for a_missile in set(missile_group):
+        a_missile.draw(canvas)
+        a_missile.update()
+        
+        if a_missile.update():
+            missile_group.remove(a_missile)  
+      
+    
+    
 def group_collide(group,other_object):
-	#global group, other_object
-	col = False
-	for one in set(group):
-		if one.collide(other_object):
-			group.remove(one)
-			col = True
-	return col
-	
+    #global group, other_object
+    col = False
+    for one in set(group):
+        if one.collide(other_object):
+            group.remove(one)
+            col = True
+    return col
+    
 
 # initialize stuff
 frame = simplegui.create_frame("Asteroids", WIDTH, HEIGHT)
