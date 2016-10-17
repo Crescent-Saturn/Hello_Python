@@ -183,7 +183,8 @@ class Sprite:
         # update position
         self.pos[0] = (self.pos[0] + self.vel[0]) % WIDTH
         self.pos[1] = (self.pos[1] + self.vel[1]) % HEIGHT
-  
+  		
+  		self.age += 1
   		
     def collide(self, other_object):
     	return dist(self.pos, other_object.pos) <= self.radius+other_object.radius
@@ -234,8 +235,9 @@ def draw(canvas):
     # draw ship and sprites
     my_ship.draw(canvas)
 #    rock_group.draw(canvas)
-    a_missile.draw(canvas)
-    process_sprite_group(rock_group,canvas)
+#    a_missile.draw(canvas)
+
+    process_sprite_group(rock_group,missile_group,canvas)
 
     if group_collide(rock_group,my_ship):
     	lives -= 1
@@ -243,7 +245,7 @@ def draw(canvas):
     # update ship and sprites
     my_ship.update()
 #    a_rock.update()
-    a_missile.update()
+#    a_missile.update()
     
     
     # draw UI
@@ -278,6 +280,7 @@ def process_sprite_group(rock_group,missile_group,canvas):
 
 	for a_missile in missile_group:
 		a_missile.draw(canvas)
+		a_missile.update()
 	
 def group_collide(group,other_object):
 	#global group, other_object
