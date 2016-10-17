@@ -186,6 +186,8 @@ class Sprite:
   		
   		self.age += 1
   		
+  		return self.age >= self.lifespan
+  		
     def collide(self, other_object):
     	return dist(self.pos, other_object.pos) <= self.radius+other_object.radius
         
