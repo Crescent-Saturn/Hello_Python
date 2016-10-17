@@ -248,7 +248,11 @@ def draw(canvas):
 #    a_rock.update()
 #    a_missile.update()
     
-    
+    if group_group_collide(missile_group,rock_group):
+    	score += 1
+   	
+    	
+    	
     # draw UI
     canvas.draw_text("Lives", [50, 50], 22, "White")
     canvas.draw_text("Score", [680, 50], 22, "White")
@@ -297,6 +301,16 @@ def group_collide(group,other_object):
             col = True
     return col
     
+def group_group_collide(grp1,grp2):
+	shot = False
+	for a in set(grp1):
+	    for b in set(grp2):
+	   	    if group_collide(a,b):
+	   	   	    grp1.discard(a)
+	   	   	    shot = True
+	return shot
+	   	   	   
+
 
 # initialize stuff
 frame = simplegui.create_frame("Asteroids", WIDTH, HEIGHT)
