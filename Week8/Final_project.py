@@ -222,7 +222,7 @@ def click(pos):
         score = 0
 
 def draw(canvas):
-    global time, started, lives, rock_group, my_ship
+    global time, started, lives, score, rock_group, my_ship
     
     # animiate background
     time += 1
@@ -248,11 +248,11 @@ def draw(canvas):
 #    a_rock.update()
 #    a_missile.update()
     
-    if group_group_collide(missile_group,rock_group):
-    	score += 1
-   	
-    	
-    	
+    score += group_group_collide(rock_group,missile_group)
+    
+    
+        
+        
     # draw UI
     canvas.draw_text("Lives", [50, 50], 22, "White")
     canvas.draw_text("Score", [680, 50], 22, "White")
@@ -302,14 +302,13 @@ def group_collide(group,other_object):
     return col
     
 def group_group_collide(grp1,grp2):
-	shot = False
-	for a in set(grp1):
-	    for b in set(grp2):
-	   	    if group_collide(a,b):
-	   	   	    grp1.discard(a)
-	   	   	    shot = True
-	return shot
-	   	   	   
+    shot = 0
+    for a in set(grp1):
+        if group_collide(grp2,a):
+            grp1.discard(a)
+            shot += 1
+    return shot
+               
 
 
 # initialize stuff
