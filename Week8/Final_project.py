@@ -159,6 +159,7 @@ class Sprite:
     def __init__(self, pos, vel, ang, ang_vel, image, info, sound = None):
         self.pos = [pos[0],pos[1]]
         self.vel = [vel[0],vel[1]]
+        self.init_v = [vel[0],vel[1]]
         self.angle = ang
         self.angle_vel = ang_vel
         self.image = image
@@ -211,7 +212,7 @@ def keyup(key):
         
 # mouseclick handlers that reset UI and conditions whether splash image is drawn
 def click(pos):
-    global started
+    global started, lives, score, soundtrack
     center = [WIDTH / 2, HEIGHT / 2]
     size = splash_info.get_size()
     inwidth = (center[0] - size[0] / 2) < pos[0] < (center[0] + size[0] / 2)
@@ -220,6 +221,9 @@ def click(pos):
         started = True
         lives = 3
         score = 0
+        soundtrack.rewind()
+        soundtrack.play()
+
 
 def draw(canvas):
     global time, started, lives, score, rock_group, my_ship
@@ -237,7 +241,11 @@ def draw(canvas):
     my_ship.draw(canvas)
 #    rock_group.draw(canvas)
 #    a_missile.draw(canvas)
-
+    for rock in rock_group:
+        for i in range(2):
+            rock.vel[i] = rock.init_v[i] + rock.init_v[i]* score* 0.025
+    
+    
     process_sprite_group(rock_group,missile_group,canvas)
 
     if group_collide(rock_group,my_ship):
@@ -248,9 +256,12 @@ def draw(canvas):
 #    a_rock.update()
 #    a_missile.update()
     
-    score += group_group_collide(rock_group,missile_group)
+    score += group_group_collide(rock_group,missile_group)*10
     
-    
+    if lives == 0:
+        started = False
+        rock_group = set()
+        
         
         
     # draw UI
@@ -269,12 +280,12 @@ def draw(canvas):
 
 # timer handler that spawns a rock    
 def rock_spawner():
-    global rock_group
+    global rock_group, my_ship
     rock_pos = [random.randrange(0, WIDTH), random.randrange(0, HEIGHT)]
     rock_vel = [random.random() * .6 - .3, random.random() * .6 - .3]
     rock_avel = random.random() * .2 - .1
     a_rock = Sprite(rock_pos, rock_vel, 0, rock_avel, asteroid_image, asteroid_info)
-    if len(rock_group) < 12:
+    if len(rock_group) < 12 and dist(rock_pos, my_ship.pos) > 30 :
         rock_group.add(a_rock)
 
 def process_sprite_group(rock_group,missile_group,canvas):
